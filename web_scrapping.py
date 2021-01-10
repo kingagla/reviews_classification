@@ -12,7 +12,7 @@ def get_review(url):
     # get page as xml file
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'lxml')
-    revs_text = (item.text.replace('\n', '') for item in soup.find_all('div', class_='revz_txt'))
+    revs_text = [item.text.replace('\n', ' ').replace('\r',' ') for item in soup.find_all('div', class_='revz_txt')]
     stars = (float(item.text.split('/')[0]) for item in soup.find_all('span', class_='review_badge'))
     revs = (item.get('class')[1] for item in soup.find_all('span', class_='review_badge'))
 
