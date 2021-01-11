@@ -6,7 +6,7 @@ import time
 
 def get_review(url):
     # open csv
-    file = open('reviews.csv', 'a', encoding='utf-8')
+    file = open('./data/reviews.csv', 'a', encoding='utf-8')
     # define settings for csv
     writer = csv.writer(file, delimiter=';', lineterminator='\n')
     # get page as xml file
