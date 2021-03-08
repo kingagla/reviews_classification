@@ -12,7 +12,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 from scripts.utils import create_dir
-
+from scripts.settings import *
 
 def mapping_from_clusters(x):
     if x == -1:
@@ -26,7 +26,7 @@ def prepare_for_learning(file_path, model_path, n_samples=5000, use_neutral=Fals
     if not use_neutral:
         rev_vec = rev_vec[rev_vec['Information'] != 'neu']
     rev_vec = rev_vec.sample(n_samples)
-    pickle.dump(rev_vec.index, open('../../data/learning_index.pickle', 'wb'))
+    pickle.dump(rev_vec.index, open(learning_index_path, 'wb'))
     X, y = rev_vec[[col for col in rev_vec.columns if col.startswith('Vec')]], rev_vec['Information']
     le = LabelEncoder()
     le.fit(y.values.reshape(-1, 1))
@@ -76,28 +76,26 @@ def fit_and_save_model(X_train, y_train, model, model_path, network=False):
 
 
 def main():
-    rev_path = '../../data/reviews_with_vec.pickle'
-    model_dir = '../../models'
     rev_vec, X, y = prepare_for_learning(rev_path,
-                                         os.path.join(model_dir, 'label_encoder.sav'),
+                                         os.path.join(model_dir, label_encoder_file),
                                          n_samples=5000,
                                          use_neutral=False)
-    le_path = os.path.join(model_dir, 'label_encoder.sav')
+    le_path = os.path.join(model_dir, label_encoder_file)
     le = pickle.load(open(le_path, 'rb'))
     y = le.transform(y)
     # learn random forest
     rf = RandomForestClassifier(n_estimators=100, max_depth=5,
                                 min_samples_leaf=2,
                                 class_weight='balanced', criterion='entropy')
-    fit_and_save_model(X, y, rf, os.path.join(model_dir, 'random_forest.sav'), network=False)
+    fit_and_save_model(X, y, rf, os.path.join(model_dir, random_forest_file), network=False)
 
     # use DBSCAN to find negative
     dbs = DBSCAN(eps=0.01, min_samples=2)
-    pickle.dump(dbs, open(os.path.join(model_dir, 'dbscan.sav'), 'wb'))
+    pickle.dump(dbs, open(os.path.join(model_dir, dbscan_file), 'wb'))
 
     # use neural network
     network = neural_network()
-    fit_and_save_model(X, y, network, os.path.join(model_dir, 'network.hdf5'), network=True)
+    fit_and_save_model(X, y, network, os.path.join(model_dir, network_file), network=True)
 
 
 if __name__ == '__main__':

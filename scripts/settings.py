@@ -1,0 +1,7 @@
+rev_path = '../../data/reviews_with_vec.pickle'
+model_dir = '../../models'
+learning_index_path= '../../data/learning_index.pickle'
+label_encoder_file = 'label_encoder.sav'
+random_forest_file = 'random_forest.sav'
+dbscan_file = 'dbscan.sav'
+network_file = 'network.hdf5'
