@@ -14,12 +14,6 @@ from sklearn.preprocessing import LabelEncoder
 from scripts.utils import create_dir
 from scripts.settings import *
 
-def mapping_from_clusters(x):
-    if x == -1:
-        return 'neg'
-    else:
-        return 'pos'
-
 
 def prepare_for_learning(file_path, model_path, n_samples=5000, use_neutral=False):
     rev_vec = pd.read_pickle(file_path)

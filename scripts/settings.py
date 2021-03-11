@@ -1,5 +1,7 @@
 rev_path = '../../data/reviews_with_vec.pickle'
 model_dir = '../../models'
+files_dir = '../../files'
+plots_dir = '../plots/confusion_matrix'
 learning_index_path= '../../data/learning_index.pickle'
 label_encoder_file = 'label_encoder.sav'
 random_forest_file = 'random_forest.sav'
