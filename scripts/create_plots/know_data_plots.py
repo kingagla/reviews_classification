@@ -74,6 +74,7 @@ if __name__ == '__main__':
     # load reviews and stopwords
     reviews = pd.read_csv('../../data/reviews.csv')
     stop_words = pd.read_csv('../../data/polish_stopwords.txt', names=['stopwords'], dtype={'stopwords': str})
+    stop_words = stop_words[stop_words['stopwords']!='nie']
     remove_stopwords = True
 
     for remove_stopwords in [True, False]:
