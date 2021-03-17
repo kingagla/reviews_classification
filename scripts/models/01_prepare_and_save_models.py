@@ -1,18 +1,15 @@
 import os
 import pickle
-import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
-from tensorflow.keras.callbacks import ModelCheckpoint
-from tensorflow.keras.layers import Dense, Dropout
-from tensorflow.keras.models import Sequential
 from sklearn.cluster import DBSCAN
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import LabelEncoder
-from scripts.utils import create_dir
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.models import Sequential
 from scripts.settings import *
+from scripts.utils import create_dir
 
 
 def prepare_for_learning(file_path, model_path, n_samples=5000, use_neutral=False):

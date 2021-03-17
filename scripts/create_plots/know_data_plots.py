@@ -1,12 +1,12 @@
-import re, os
+import os
+import re
+from collections import Counter
 import matplotlib.pyplot as plt
-import morfeusz2
 import pandas as pd
 import seaborn as sns
 from wordcloud import WordCloud
-from collections import Counter
-from scripts.utils import lemmatize_text
 from scripts.settings import *
+from scripts.utils import lemmatize_text
 
 
 def save_wordcloud(text, name, stopwords):
@@ -44,9 +44,9 @@ def plot_word_freq(text, name, stopwords, n=30):
     sns.set(font_scale=1.5)
     sns.barplot('Amount', 'Word', data=df.iloc[:n])
     if stopwords is None:
-        plt.savefig(os.path.join(plots_dir,'with_stopwords',f'bar_{name}.png'), dpi=500, format='png')
+        plt.savefig(os.path.join(plots_dir, 'with_stopwords', f'bar_{name}.png'), dpi=500, format='png')
     else:
-        plt.savefig(os.path.join(plots_dir,'without_stopwords',f'bar_{name}.png'), dpi=500, format='png')
+        plt.savefig(os.path.join(plots_dir, 'without_stopwords', f'bar_{name}.png'), dpi=500, format='png')
 
 
 def main():

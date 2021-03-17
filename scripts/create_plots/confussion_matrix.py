@@ -1,7 +1,7 @@
 import os
-import seaborn as sns
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
 from sklearn.metrics import confusion_matrix
 from scripts.utils import create_dir
 
