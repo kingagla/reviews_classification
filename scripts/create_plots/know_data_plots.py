@@ -70,6 +70,12 @@ def main():
             save_wordcloud(opinions, file_name, None)
             plot_word_freq(opinions, file_name, None)
 
+    # plot amount of opinion types
+    amount = reviews['Information'].value_counts()
+    plt.bar(amount.index, amount.values)
+    plt.savefig(os.path.join(plots_dir, 'amount.png'), dpi=500, format='png')
+    plt.close()
+
 
 if __name__ == '__main__':
     # load reviews and stopwords
