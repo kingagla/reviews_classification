@@ -43,10 +43,11 @@ def main():
     y_preds = [y_network, y_rf, y_dbscan]
     filenames = ['network', 'rf', 'dbscan']
 
+    # create classification report and confusion matrix
     for y_pred, filename in zip(y_preds, filenames):
         excel_file = os.path.join(files_dir, f'{filename}.xlsx')
         classification_report_to_excel(y_num, y_pred, excel_file)
-        plot_file = os.path.join(plots_dir, f'{filename}.png')
+        plot_file = os.path.join(plots_dir, 'confusion_matrix', f'{filename}.png')
         plot_conf_matrix(y_num, y_pred, plot_file)
 
 

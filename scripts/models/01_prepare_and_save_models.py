@@ -3,9 +3,9 @@ import pickle
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-from keras.callbacks import ModelCheckpoint
-from keras.layers import Dense, Dropout
-from keras.models import Sequential
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.models import Sequential
 from sklearn.cluster import DBSCAN
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
@@ -16,28 +16,22 @@ from scripts.settings import *
 
 
 def prepare_for_learning(file_path, model_path, n_samples=5000, use_neutral=False):
+    # load data
     rev_vec = pd.read_pickle(file_path)
+    # remove neutral if not used
     if not use_neutral:
         rev_vec = rev_vec[rev_vec['Information'] != 'neu']
+    # use only part of available data
     rev_vec = rev_vec.sample(n_samples)
+    # save indices of training and validation set
     pickle.dump(rev_vec.index, open(learning_index_path, 'wb'))
+
     X, y = rev_vec[[col for col in rev_vec.columns if col.startswith('Vec')]], rev_vec['Information']
     le = LabelEncoder()
     le.fit(y.values.reshape(-1, 1))
     create_dir(os.path.dirname(model_path))
     pickle.dump(le, open(model_path, 'wb'))
     return rev_vec, X, y
-
-
-def plot_conf_matrix(y_test, y_pred, normalize, save=False, plot_path=None):
-    cm = confusion_matrix(y_test, y_pred, normalize=normalize)
-    df_cm = pd.DataFrame(cm, columns=['Negative', 'Positive'], index=['Negative', 'Positive'])
-    plt.figure(figsize=(10, 7))
-    sns.heatmap(df_cm, annot=True, cmap='Blues', cbar=False)
-    if save:
-        create_dir(os.path.dirname(plot_path))
-        plt.savefig(plot_path)
-    plt.show()
 
 
 def classification_report_to_excel(y_test, y_pred, excel_path):
@@ -60,7 +54,9 @@ def neural_network():
 
 
 def fit_and_save_model(X_train, y_train, model, model_path, network=False):
+    # create directory for model
     create_dir(os.path.dirname(model_path))
+
     if network:
         checkpoint = ModelCheckpoint(model_path, monitor='val_acc', verbose=1, save_best_only=True)
         model.fit(X_train, y_train, epochs=150, batch_size=512, validation_split=0.2, callbacks=[checkpoint])

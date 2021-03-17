@@ -11,6 +11,8 @@ def lemmatize_text(text):
     text_new = []
     for word in text:
         w = morf.analyse(word)[0][0][1].split(':')[0]
+        if w == 'oko':
+            w = 'ok'
         text_new.append(w)
     return " ".join(text_new)
 

@@ -1,4 +1,4 @@
-import re
+import re, os
 import matplotlib.pyplot as plt
 import morfeusz2
 import pandas as pd
@@ -6,6 +6,7 @@ import seaborn as sns
 from wordcloud import WordCloud
 from collections import Counter
 from scripts.utils import lemmatize_text
+from scripts.settings import *
 
 
 def save_wordcloud(text, name, stopwords):
@@ -17,9 +18,9 @@ def save_wordcloud(text, name, stopwords):
     plt.imshow(cloud, interpolation="bilinear")
     plt.axis("off")
     if stopwords is None:
-        plt.savefig(f'../../plots/with_stopwords/cloud_{name}.png', dpi=500, format='png')
+        plt.savefig(os.path.join(plots_dir, 'with_stopwords', f'cloud_{name}.png'), dpi=500, format='png')
     else:
-        plt.savefig(f'../../plots/without_stopwords/cloud_{name}.png', dpi=500, format='png')
+        plt.savefig(os.path.join(plots_dir, 'without_stopwords', f'cloud_{name}.png'), dpi=500, format='png')
 
 
 def plot_word_freq(text, name, stopwords, n=30):
@@ -43,9 +44,9 @@ def plot_word_freq(text, name, stopwords, n=30):
     sns.set(font_scale=1.5)
     sns.barplot('Amount', 'Word', data=df.iloc[:n])
     if stopwords is None:
-        plt.savefig(f'../../plots/with_stopwords/bar_{name}.png', dpi=500, format='png')
+        plt.savefig(os.path.join(plots_dir,'with_stopwords',f'bar_{name}.png'), dpi=500, format='png')
     else:
-        plt.savefig(f'../../plots/without_stopwords/bar_{name}.png', dpi=500, format='png')
+        plt.savefig(os.path.join(plots_dir,'without_stopwords',f'bar_{name}.png'), dpi=500, format='png')
 
 
 def main():
@@ -74,7 +75,7 @@ if __name__ == '__main__':
     # load reviews and stopwords
     reviews = pd.read_csv('../../data/reviews.csv')
     stop_words = pd.read_csv('../../data/polish_stopwords.txt', names=['stopwords'], dtype={'stopwords': str})
-    stop_words = stop_words[stop_words['stopwords']!='nie']
+    stop_words = stop_words[stop_words['stopwords'] != 'nie']
     remove_stopwords = True
 
     for remove_stopwords in [True, False]:
