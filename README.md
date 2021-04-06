@@ -1,2 +1,12 @@
-# Opinie
-Klasyfikacja opinii w oparciu o ich treść z wykorzystaniem metod uczenia maszynowego
+# Reviews classification
+
+In this repo you can find end-to-end NLP project in which I downloaded reviews, analyzed them and created machine 
+learning models for sentiment analysis.   
+
+Analysis and results of this project are described in docs 
+https://github.com/kingagla/Reviews_classification/blob/main/docs/reviews%20classification.pdf
+
+### Important information
+Please notice that to reproduce the project, folder roberta should contain pre-trained polish-roberta large model which
+ is available here:
+https://github.com/sdadas/polish-roberta
