@@ -2,7 +2,7 @@ import os
 import pickle
 import numpy as np
 import pandas as pd
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 from scripts.create_plots.confussion_matrix import plot_conf_matrix
 from scripts.settings import *
 from scripts.utils import mapping_from_clusters, classification_report_to_excel
