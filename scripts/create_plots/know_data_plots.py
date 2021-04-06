@@ -18,9 +18,9 @@ def save_wordcloud(text, name, stopwords):
     plt.imshow(cloud, interpolation="bilinear")
     plt.axis("off")
     if stopwords is None:
-        plt.savefig(os.path.join(plots_dir, 'with_stopwords', f'cloud_{name}.png'), dpi=500, format='png')
+        plt.savefig(os.path.join(plots_dir, 'with_stopwords', f'cloud_{name}.png'), format='png')
     else:
-        plt.savefig(os.path.join(plots_dir, 'without_stopwords', f'cloud_{name}.png'), dpi=500, format='png')
+        plt.savefig(os.path.join(plots_dir, 'without_stopwords', f'cloud_{name}.png'), format='png')
 
 
 def plot_word_freq(text, name, stopwords, n=30):
@@ -44,9 +44,9 @@ def plot_word_freq(text, name, stopwords, n=30):
     sns.set(font_scale=1.5)
     sns.barplot('Amount', 'Word', data=df.iloc[:n])
     if stopwords is None:
-        plt.savefig(os.path.join(plots_dir, 'with_stopwords', f'bar_{name}.png'), dpi=500, format='png')
+        plt.savefig(os.path.join(plots_dir, 'with_stopwords', f'bar_{name}.png'), format='png')
     else:
-        plt.savefig(os.path.join(plots_dir, 'without_stopwords', f'bar_{name}.png'), dpi=500, format='png')
+        plt.savefig(os.path.join(plots_dir, 'without_stopwords', f'bar_{name}.png'), format='png')
 
 
 def main():
@@ -73,7 +73,7 @@ def main():
     # plot amount of opinion types
     amount = reviews['Information'].value_counts()
     plt.bar(amount.index, amount.values)
-    plt.savefig(os.path.join(plots_dir, 'amount.png'), dpi=500, format='png')
+    plt.savefig(os.path.join(plots_dir, 'amount.png'), format='png')
     plt.close()
 
 
