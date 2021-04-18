@@ -42,10 +42,14 @@ def reviews_to_vector(reviews, tokenizer, model, lemmatize=False):
             print(e)
 
 
-if __name__ == '__main__':
+def main():
     # load reviews and model
     model_dir = "../../roberta"
     reviews = pd.read_csv('../../data/reviews.csv')
     tokenizer = PreTrainedTokenizerFast(tokenizer_file=os.path.join(model_dir, "tokenizer.json"))
     model = RobertaModel.from_pretrained(model_dir, output_hidden_states=True)
     reviews_to_vector(reviews, tokenizer, model, lemmatize=True)
+
+
+if __name__ == '__main__':
+    main()
