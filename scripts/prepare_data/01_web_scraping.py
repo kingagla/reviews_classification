@@ -31,7 +31,7 @@ def main():
     # download opinions - limiting to 35 000
     n = 0
     page_num = 9073
-    max_opinions = 35000
+    max_opinions = 5000
     while n <= max_opinions:
         start_time = time.time()
         # define web page for scrapping
