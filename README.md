@@ -13,6 +13,6 @@ https://github.com/sdadas/polish-roberta
 
 Next you should run scripts with following order:
 
-1. Run all scripts from *prepare_data* folder with order suggested by names
+1. Run all scripts from *scripts/prepare_data* folder with order suggested by names
 2. Run *know_your_data_plots.py*
-3. Run scripts from *models* folder with order suggested by names
+3. Run scripts from *scripts/models* folder with order suggested by names
