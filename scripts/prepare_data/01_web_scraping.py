@@ -32,6 +32,7 @@ def main():
     n = 0
     page_num = 9073
     max_opinions = 35000
+    open('../../data/reviews.csv', 'w', encoding='utf-8').close()
     while n <= max_opinions:
         start_time = time.time()
         # define web page for scrapping
@@ -42,8 +43,8 @@ def main():
 
     reviews = pd.read_csv('../../data/reviews.csv', sep=';', names=['Star', 'Information', 'Opinion'], engine='python',
                           encoding='utf-8')
-    reviews.to_csv('./data/reviews.csv', index=False)
-    reviews.to_pickle('./data/reviews.pickle')
+    reviews.to_csv('../../data/reviews.csv', index=False)
+    reviews.to_pickle('../../data/reviews.pickle')
 
 
 if __name__ == '__main__':
